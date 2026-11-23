@@ -44,7 +44,7 @@ a:hover { color: var(--hueso); }
 :focus-visible { outline: 2px solid var(--cobre-claro); outline-offset: 3px; border-radius: 4px; }
 h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: .02em; }
 p { margin: 0; }
-.envoltura { width: 100%; max-width: 1200px; margin-inline: auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.envoltura { width: 100%; max-width: 1440px; margin-inline: auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
 .etiqueta { font-family: var(--dato); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cobre-claro); }
 
 /* ---------- Encabezado ---------- */
@@ -84,8 +84,11 @@ p { margin: 0; }
 .capitulo { min-height: 110vh; min-height: 110svh; display: flex; align-items: center; }
 .capitulo .envoltura { display: flex; }
 .texto-capitulo { max-width: 31rem; display: flex; flex-direction: column; gap: 18px; padding: clamp(22px, 3vw, 34px); border-radius: 22px; border: 1px solid var(--linea); background: color-mix(in srgb, var(--obsidiana) 80%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 24px 60px -30px rgba(0,0,0,.8); }
-.columna-heroe { display: flex; flex-direction: column; gap: 22px; max-width: 34rem; min-width: 0; }
-.titulo-marca { font-size: clamp(2.3rem, 5.2vw, 4.3rem); line-height: 1; letter-spacing: .05em; font-weight: 700; overflow-wrap: anywhere; text-shadow: 0 4px 30px rgba(0,0,0,.85); }
+.columna-heroe { display: flex; flex-direction: column; gap: 26px; max-width: 48rem; min-width: 0; }
+.marca-heroe { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.marca-heroe img { width: clamp(84px, 9vw, 150px); height: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,.8)); }
+.titulo-marca { font-size: clamp(1.9rem, 4.4vw, 4.6rem); line-height: 1; letter-spacing: .05em; font-weight: 700; white-space: nowrap; text-shadow: 0 4px 30px rgba(0,0,0,.85); }
+.columna-heroe .texto-capitulo { max-width: 34rem; }
 .lema { font-family: var(--display); font-size: clamp(1.2rem, 2.4vw, 1.6rem); color: var(--cobre-claro); letter-spacing: .03em; }
 .capitulo h2 { font-size: clamp(1.9rem, 4.2vw, 3.2rem); line-height: 1.1; }
 .capitulo p { color: var(--ceniza); font-size: 1.05rem; max-width: 34rem; }
@@ -229,7 +232,10 @@ legend b { color: var(--hueso); font-weight: 500; }
       <article class="capitulo">
         <div class="envoltura">
           <div class="columna-heroe">
-            <h1 class="titulo-marca">Tlacotzontli</h1>
+            <div class="marca-heroe">
+              <img src="logo.png" alt="Logotipo de Tlacotzontli" width="150" height="150">
+              <h1 class="titulo-marca">Tlacotzontli</h1>
+            </div>
             <div class="texto-capitulo">
               <span class="etiqueta">Dispositivo de seguridad infantil · Ensenada, B.C.</span>
               <p class="lema">Siempre sabes dónde están.</p>
@@ -398,7 +404,7 @@ legend b { color: var(--hueso); font-weight: 500; }
       <div class="compra">
         <span class="etiqueta">Preventa</span>
         <h2>Aparta el tuyo.</h2>
-        <p class="precio"><span class="pendiente">[PRECIO]</span><small>MXN · pago único</small></p>
+        <p class="precio">$1,599<small>MXN · pago único</small></p>
         <fieldset>
           <legend>Color: <b id="nombre-color">Obsidiana</b></legend>
           <div class="muestras">
