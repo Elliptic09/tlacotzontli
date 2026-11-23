@@ -61,8 +61,11 @@ p { margin: 0; }
 #lienzo { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .escenario::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 80% at 70% 45%, transparent 40%, var(--obsidiana) 100%); }
 .rotulos { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
-.rotulo { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 8px; font-family: var(--dato); font-size: .72rem; letter-spacing: .06em; color: var(--hueso); white-space: nowrap; opacity: 0; will-change: transform, opacity; }
-.rotulo::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cobre); box-shadow: 0 0 0 4px color-mix(in srgb, var(--cobre) 30%, transparent); flex-shrink: 0; }
+.rotulo { position: absolute; left: 0; top: 0; font-family: var(--texto); font-size: .9rem; font-weight: 500; line-height: 1.3; color: var(--hueso); white-space: nowrap; padding: 8px 14px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--cobre) 55%, transparent); background: color-mix(in srgb, var(--obsidiana) 90%, transparent); box-shadow: 0 10px 30px -12px rgba(0,0,0,.9); opacity: 0; will-change: transform, opacity; }
+.rotulo small { display: block; font-family: var(--dato); font-size: .7rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: var(--cobre-claro); }
+.grafo { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.grafo line { stroke: var(--cobre); stroke-width: 1.2; stroke-dasharray: 3 4; }
+.grafo circle { fill: var(--cobre); stroke: color-mix(in srgb, var(--cobre) 35%, transparent); stroke-width: 6; }
 .sin-3d .escenario { display: grid; place-items: center; }
 .sin-3d #lienzo { display: none; }
 .respaldo { display: none; width: min(46vw, 320px); opacity: .9; }
@@ -71,8 +74,10 @@ p { margin: 0; }
 .capitulos { position: relative; z-index: 3; margin-top: -100vh; margin-top: -100svh; }
 .capitulo { min-height: 110vh; min-height: 110svh; display: flex; align-items: center; }
 .capitulo .envoltura { display: flex; }
-.texto-capitulo { max-width: 30rem; display: flex; flex-direction: column; gap: 18px; padding: 28px 0; }
-.capitulo h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1.05; }
+.texto-capitulo { max-width: 31rem; display: flex; flex-direction: column; gap: 18px; padding: clamp(22px, 3vw, 34px); border-radius: 22px; border: 1px solid var(--linea); background: color-mix(in srgb, var(--obsidiana) 80%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 24px 60px -30px rgba(0,0,0,.8); }
+.columna-heroe { display: flex; flex-direction: column; gap: 22px; max-width: 34rem; min-width: 0; }
+.titulo-marca { font-size: clamp(2.3rem, 5.2vw, 4.3rem); line-height: 1; letter-spacing: .05em; font-weight: 700; overflow-wrap: anywhere; text-shadow: 0 4px 30px rgba(0,0,0,.85); }
+.lema { font-family: var(--display); font-size: clamp(1.2rem, 2.4vw, 1.6rem); color: var(--cobre-claro); letter-spacing: .03em; }
 .capitulo h2 { font-size: clamp(1.9rem, 4.2vw, 3.2rem); line-height: 1.1; }
 .capitulo p { color: var(--ceniza); font-size: 1.05rem; max-width: 34rem; }
 .capitulo p strong { color: var(--hueso); font-weight: 500; }
@@ -81,8 +86,8 @@ p { margin: 0; }
 .gesto { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: .92rem; color: var(--ceniza); }
 .gesto b { font-family: var(--dato); font-weight: 500; color: var(--hueso); }
 @media (max-width: 820px) {
-  .capitulo { align-items: flex-end; }
-  .texto-capitulo { background: linear-gradient(to top, var(--obsidiana) 72%, transparent); padding: 64px 0 48px; max-width: none; }
+  .capitulo { align-items: flex-end; padding-bottom: 24px; }
+  .texto-capitulo { max-width: none; width: 100%; padding: 22px 20px; }
 }
 
 /* ---------- Banda en movimiento ---------- */
@@ -129,7 +134,7 @@ p { margin: 0; }
 .panel > p { color: var(--ceniza); max-width: 40rem; margin-bottom: 26px; }
 .datos { margin: 0; display: grid; grid-template-columns: minmax(0, 12rem) minmax(0, 1fr); border-top: 1px solid var(--linea); }
 .datos dt, .datos dd { margin: 0; padding: 14px 0; border-bottom: 1px solid var(--linea); }
-.datos dt { color: var(--ceniza); font-size: .9rem; padding-right: 16px; }
+.datos dt { color: var(--cobre-claro); font-size: .9rem; font-weight: 500; padding-right: 16px; }
 .datos dd { font-family: var(--dato); font-size: .92rem; color: var(--hueso); }
 .pendiente { color: var(--cobre-claro); }
 @media (max-width: 760px) {
@@ -168,6 +173,9 @@ legend b { color: var(--hueso); font-weight: 500; }
 .formulario input { flex: 1 1 14rem; min-width: 0; min-height: 48px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--linea); background: var(--obsidiana-2); color: var(--hueso); font: 400 .95rem var(--texto); }
 .formulario input::placeholder { color: #7D8885; }
 .aviso { font-size: .88rem; color: var(--jade-claro); }
+.contador { display: flex; align-items: baseline; gap: 10px; font-size: .95rem; color: var(--ceniza); }
+.contador b { font-family: var(--dato); font-size: 2rem; font-weight: 500; color: var(--cobre-claro); font-variant-numeric: tabular-nums; }
+.nota { font-size: .8rem; color: var(--ceniza); }
 @media (max-width: 860px) { .preventa { grid-template-columns: minmax(0, 1fr); } .incluye { grid-template-columns: minmax(0, 1fr); } }
 
 /* Pie */
@@ -197,26 +205,30 @@ legend b { color: var(--hueso); font-weight: 500; }
 <main>
   <section class="escena" id="inicio" aria-label="El dispositivo">
     <div class="escenario" id="escenario">
-      <canvas id="lienzo" aria-label="Modelo 3D de la pulsera Tlacotzontli que gira y se desarma al hacer scroll" role="img"></canvas>
+      <canvas id="lienzo" aria-label="Modelo 3D de la pulsera Tlacotzontli con greca discreta, que gira y se desarma al hacer scroll" role="img"></canvas>
       <img class="respaldo" src="logo.png" alt="Logotipo de Tlacotzontli">
       <div class="rotulos" aria-hidden="true">
-        <div class="rotulo" data-parte="superior">Tapa y botón de pánico</div>
-        <div class="rotulo" data-parte="placa">ESP32 + módem LTE/GNSS</div>
-        <div class="rotulo" data-parte="bateria">Batería LiPo recargable</div>
-        <div class="rotulo" data-parte="base">Base y etiqueta NFC</div>
+        <svg class="grafo" id="grafo"><line data-l="tapa"></line><line data-l="placa"></line><line data-l="bateria"></line><line data-l="carcasa"></line><circle data-c="tapa" r="4"></circle><circle data-c="placa" r="4"></circle><circle data-c="bateria" r="4"></circle><circle data-c="carcasa" r="4"></circle></svg>
+        <div class="rotulo" data-parte="tapa"><small>Tapa</small>Botón de pánico al ras</div>
+        <div class="rotulo" data-parte="placa"><small>Placa</small>ESP32 + módem LTE/GNSS</div>
+        <div class="rotulo" data-parte="bateria"><small>Energía</small>Batería LiPo recargable</div>
+        <div class="rotulo" data-parte="carcasa"><small>Carcasa</small>Micrófono y etiqueta NFC</div>
       </div>
     </div>
 
     <div class="capitulos">
       <article class="capitulo">
         <div class="envoltura">
-          <div class="texto-capitulo">
-            <span class="etiqueta">Dispositivo de seguridad infantil · Ensenada, B.C.</span>
-            <h1>Siempre sabes dónde están.</h1>
-            <p>Tlacotzontli envía la ubicación de tu hijo o hija en tiempo real y avisa a toda la familia cuando presiona su botón. La app es gratuita y no pagas mensualidad con nosotros.</p>
-            <div class="acciones">
-              <a class="boton boton-cobre" href="#preventa">Apartar el mío</a>
-              <a class="boton boton-linea" href="#primeras-horas">Por qué importa</a>
+          <div class="columna-heroe">
+            <h1 class="titulo-marca">Tlacotzontli</h1>
+            <div class="texto-capitulo">
+              <span class="etiqueta">Dispositivo de seguridad infantil · Ensenada, B.C.</span>
+              <p class="lema">Siempre sabes dónde están.</p>
+              <p>Tlacotzontli envía la ubicación de tu hijo o hija en tiempo real y avisa a toda la familia cuando presiona su botón. La app es gratuita y no pagas mensualidad con nosotros.</p>
+              <div class="acciones">
+                <a class="boton boton-cobre" href="#preventa">Apartar el mío</a>
+                <a class="boton boton-linea" href="#primeras-horas">Por qué importa</a>
+              </div>
             </div>
           </div>
         </div>
@@ -227,11 +239,12 @@ legend b { color: var(--hueso); font-weight: 500; }
           <div class="texto-capitulo">
             <span class="etiqueta">Botón de pánico</span>
             <h2>Un botón. Toda la familia enterada.</h2>
-            <p>La alerta llega a cada tutor con la ubicación en vivo. Al activarse, el dispositivo graba <strong>un minuto de audio</strong> para quien la atiende, y su luz confirma al niño que alguien ya la vio.</p>
+            <p>El botón está arriba, al ras de la pulsera, para que nadie note que está ahí. La alerta llega a cada tutor con la ubicación en vivo. Al activarse, el dispositivo graba <strong>un minuto de audio</strong> para quien la atiende, y su luz confirma al niño que alguien ya la vio.</p>
             <div class="gesto">
               <b>Activar</b><span>Mantener presionado 2 s</span>
               <b>Cancelar</b><span>3 toques rápidos, si fue un error</span>
             </div>
+            <p>Desde la app puedes cambiar la forma de activar y de cancelar la alerta.</p>
           </div>
         </div>
       </article>
@@ -253,8 +266,8 @@ legend b { color: var(--hueso); font-weight: 500; }
         <div class="envoltura">
           <div class="texto-capitulo">
             <span class="etiqueta">Por dentro</span>
-            <h2>Pequeño por fuera, completo por dentro.</h2>
-            <p>Una placa con ESP32 y módem LTE/GNSS, batería LiPo recargable, micrófono y una etiqueta NFC: si alguien encuentra el dispositivo y lo escanea, avisa a la familia sin ver ningún dato del menor.</p>
+            <h2>Discreta por fuera, completa por dentro.</h2>
+            <p>Por fuera parece una pulsera deportiva común: sin pantalla, con el botón al ras y una greca del mismo color que apenas se nota. Dentro lleva una placa con ESP32 y módem LTE/GNSS, batería LiPo, micrófono y una etiqueta NFC que, si alguien la escanea, avisa a la familia sin mostrar datos del menor.</p>
           </div>
         </div>
       </article>
@@ -304,7 +317,7 @@ legend b { color: var(--hueso); font-weight: 500; }
         <div class="pieza">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M11 18.5h2"></path></svg>
           <h3>La app</h3>
-          <p>Gratis para todos, tengas o no el dispositivo. Para Android e iOS.</p>
+          <p>Gratis para todos, tengas o no Tlacotzontli. Para Android e iOS.</p>
           <ul><li>Mapa en vivo y zonas seguras</li><li>Varios tutores por niño</li><li>Localiza también el celular de un familiar</li></ul>
         </div>
         <div class="pieza">
@@ -335,27 +348,27 @@ legend b { color: var(--hueso); font-weight: 500; }
           <div class="panel" role="tabpanel" id="panel-ubicacion" aria-labelledby="tab-ubicacion">
             <h3>Ubicación</h3>
             <p>Receptor GNSS multiconstelación. La app muestra la precisión de cada posición como un círculo en el mapa.</p>
-            <dl class="datos"><dt>Constelaciones</dt><dd>GPS · GLONASS · Galileo · BeiDou</dd><dt>Precisión en exterior</dt><dd>± 5 a 10 m (prototipo)</dd><dt>Actualización</dt><dd>cada 2 s con señal</dd><dt>Estado de movimiento</dt><dd>quieto · caminando · en vehículo</dd></dl>
+            <dl class="datos"><dt>Constelaciones</dt><dd>GPS · GLONASS · Galileo · BeiDou</dd><dt>Precisión en exterior</dt><dd>± 5 a 10 m (prototipo)</dd><dt>Actualización</dt><dd>Cada 2 s con señal</dd><dt>Estado de movimiento</dt><dd>Quieto · caminando · en vehículo</dd></dl>
           </div>
           <div class="panel" role="tabpanel" id="panel-red" aria-labelledby="tab-red" hidden>
             <h3>Conectividad</h3>
             <p>Envía todo por red celular. No incluye plan de datos: lo contratas con el operador que elijas y activas la eSIM desde la app, como un reloj inteligente.</p>
-            <dl class="datos"><dt>Red celular</dt><dd>LTE Cat 1 con eSIM</dd><dt>Corto alcance</dt><dd>Bluetooth LE (vinculación)</dd><dt>Plan de datos</dt><dd>con tu operador</dd></dl>
+            <dl class="datos"><dt>Red celular</dt><dd>LTE Cat 1 con eSIM</dd><dt>Corto alcance</dt><dd>Bluetooth LE (vinculación)</dd><dt>Plan de datos</dt><dd>Con tu operador</dd></dl>
           </div>
           <div class="panel" role="tabpanel" id="panel-boton" aria-labelledby="tab-boton" hidden>
             <h3>Botón de pánico</h3>
-            <p>Los gestos se cambian desde la app y nunca pueden ser iguales para activar y cancelar.</p>
-            <dl class="datos"><dt>Activar</dt><dd>mantener 2 s (configurable)</dd><dt>Cancelar</dt><dd>3 toques rápidos (configurable)</dd><dt>Confirmación</dt><dd>la luz cambia cuando un tutor atiende</dd></dl>
+            <p>Va arriba, al ras de la tapa. La forma de activar y de cancelar se cambia desde la app, y nunca pueden ser iguales.</p>
+            <dl class="datos"><dt>Activar</dt><dd>Mantener 2 s (configurable)</dd><dt>Cancelar</dt><dd>3 toques rápidos (configurable)</dd><dt>Confirmación</dt><dd>La luz cambia cuando un tutor atiende</dd></dl>
           </div>
           <div class="panel" role="tabpanel" id="panel-audio" aria-labelledby="tab-audio" hidden>
             <h3>Audio</h3>
             <p>Graba solo cuando se activa la alerta. El audio lo escuchan únicamente los tutores; nunca se publica en los reportes.</p>
-            <dl class="datos"><dt>Micrófono</dt><dd>MEMS omnidireccional</dd><dt>Grabación</dt><dd>60 s por alerta</dd><dt>Calidad</dt><dd>voz, 8 kHz</dd></dl>
+            <dl class="datos"><dt>Micrófono</dt><dd>MEMS omnidireccional</dd><dt>Grabación</dt><dd>60 s por alerta</dd><dt>Calidad</dt><dd>Voz, 8 kHz</dd></dl>
           </div>
           <div class="panel" role="tabpanel" id="panel-nfc" aria-labelledby="tab-nfc" hidden>
             <h3>Etiqueta NFC</h3>
             <p>Si alguien encuentra el dispositivo, lo acerca a su celular y se abre una página para avisar a la familia. Funciona en iPhone y Android sin instalar nada.</p>
-            <dl class="datos"><dt>Tipo</dt><dd>etiqueta pasiva</dd><dt>Contiene</dt><dd>un enlace con código, sin datos personales</dd><dt>Si se pierde</dt><dd>se genera un enlace nuevo desde la app</dd></dl>
+            <dl class="datos"><dt>Tipo</dt><dd>Etiqueta pasiva</dd><dt>Contiene</dt><dd>Un enlace con código, sin datos personales</dd><dt>Si se pierde</dt><dd>Se genera un enlace nuevo desde la app</dd></dl>
           </div>
           <div class="panel" role="tabpanel" id="panel-energia" aria-labelledby="tab-energia" hidden>
             <h3>Energía</h3>
@@ -378,23 +391,25 @@ legend b { color: var(--hueso); font-weight: 500; }
         <h2>Aparta el tuyo.</h2>
         <p class="precio"><span class="pendiente">[PRECIO]</span><small>MXN · pago único</small></p>
         <fieldset>
-          <legend>Color: <b id="nombre-color">Jade</b></legend>
+          <legend>Color: <b id="nombre-color">Obsidiana</b></legend>
           <div class="muestras">
-            <div class="muestra"><input type="radio" name="color" id="color-jade" value="jade" checked><label for="color-jade" style="background: #1D767A" title="Jade"><span class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Jade</span></label></div>
-            <div class="muestra"><input type="radio" name="color" id="color-cobre" value="cobre"><label for="color-cobre" style="background: #9A5B2E" title="Cobre"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Cobre</span></label></div>
-            <div class="muestra"><input type="radio" name="color" id="color-obsidiana" value="obsidiana"><label for="color-obsidiana" style="background: #23292A" title="Obsidiana"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Obsidiana</span></label></div>
+            <div class="muestra"><input type="radio" name="color" id="color-obsidiana" value="obsidiana" checked><label for="color-obsidiana" style="background: #181A1B" title="Obsidiana"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Obsidiana</span></label></div>
+            <div class="muestra"><input type="radio" name="color" id="color-grafito" value="grafito"><label for="color-grafito" style="background: #2C2F31" title="Grafito"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Grafito</span></label></div>
+            <div class="muestra"><input type="radio" name="color" id="color-noche" value="noche"><label for="color-noche" style="background: #1A2B48" title="Azul noche"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Azul noche</span></label></div>
           </div>
         </fieldset>
         <div class="incluye">
           <div><h3>Incluye</h3><ul><li>Dispositivo Tlacotzontli</li><li>Cable de carga</li><li>App gratuita para toda la familia</li></ul></div>
           <div><h3>No incluye</h3><ul><li>Plan de datos: lo contratas con tu operador</li></ul></div>
         </div>
+        <p class="contador" id="contador" hidden><b id="numero">0</b><span id="texto-contador">personas interesadas</span></p>
         <form class="formulario" id="formulario" novalidate>
-          <label for="correo">Te avisamos cuando abra la preventa</label>
-          <input id="correo" name="correo" type="email" placeholder="tu@correo.com" autocomplete="email" required>
-          <button class="boton boton-cobre" type="submit">Avisarme</button>
+          <label for="correo">¿Te interesa? Déjanos tu correo para avisarte (opcional)</label>
+          <input id="correo" name="correo" type="email" placeholder="tu@correo.com" autocomplete="email">
+          <button class="boton boton-cobre" type="submit" id="enviar">Me interesa</button>
         </form>
         <p class="aviso" id="aviso" role="status" hidden></p>
+        <p class="nota">Tu correo solo se usará para avisarte cuando abra la preventa.</p>
       </div>
     </div>
   </section>
@@ -414,6 +429,8 @@ legend b { color: var(--hueso); font-weight: 500; }
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="modelo.js"></script>
 <script>
 (function () {
   'use strict';
@@ -440,128 +457,154 @@ legend b { color: var(--hueso); font-weight: 500; }
     });
   });
 
-  /* ---------------- Formulario (demostración) ---------------- */
-  var form = document.getElementById('formulario');
-  var aviso = document.getElementById('aviso');
+  /* ---------------- Interesados: contador compartido ---------------- */
+  var form = document.getElementById('formulario'), aviso = document.getElementById('aviso');
+  var correo = document.getElementById('correo'), enviar = document.getElementById('enviar');
+  var contador = document.getElementById('contador'), numero = document.getElementById('numero');
+  var db = null, refTotal = null, miId = null;
+  function mostrarTotal(n) {
+    numero.textContent = n;
+    document.getElementById('texto-contador').textContent = n === 1 ? 'persona interesada' : 'personas interesadas';
+    contador.hidden = false;
+  }
+  if (window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('user').then(function (u) { return u ? u.id() : null; }).then(function (id) { miId = id; }).catch(function () {});
+    window.claude.use('db').then(function (d) {
+      if (!d) return;
+      db = d;
+      refTotal = db.doc('contador/total');
+      refTotal.onSnapshot(function (snap) {
+        var datos = snap.exists ? snap.data() : null;
+        mostrarTotal((datos && datos.n) || 0);
+      }, function () {});
+    }).catch(function () {});
+  }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var correo = document.getElementById('correo');
     aviso.hidden = false;
-    if (!correo.value || !correo.checkValidity()) {
-      aviso.textContent = 'Escribe un correo válido, por ejemplo nombre@correo.com.';
-      return;
-    }
-    aviso.textContent = 'Versión de demostración: el registro todavía no se guarda. Se conectará a la base de datos de Tlacotzontli.';
+    var valor = correo.value.trim();
+    if (valor && !correo.checkValidity()) { aviso.textContent = 'Revisa el correo, por ejemplo nombre@correo.com, o déjalo vacío.'; return; }
+    if (!db || !miId) { aviso.textContent = 'El registro funciona al abrir la página con tu cuenta de Claude. Aquí no se guardó.'; return; }
+    enviar.disabled = true;
+    // Cada correo se guarda en el espacio de quien lo registra; solo el dueño puede leerlos todos
+    db.collection('interesados/' + miId + '/registros').add({ correo: valor || null, fecha: new Date().toISOString() })
+      .then(function () { return refTotal.get(); })
+      .then(function (snap) {
+        var n = ((snap.exists && snap.data().n) || 0) + 1;
+        return refTotal.set({ n: n, actualizado: new Date().toISOString() }).then(function () { return n; });
+      })
+      .then(function (n) {
+        mostrarTotal(n);
+        aviso.textContent = '¡Gracias! Ya somos ' + n + (n === 1 ? ' persona interesada.' : ' personas interesadas.');
+        correo.value = '';
+      })
+      .catch(function () { aviso.textContent = 'No se pudo registrar. Intenta de nuevo.'; })
+      .then(function () { enviar.disabled = false; });
   });
 
-  /* ---------------- 3D ---------------- */
+  /* ---------------- 3D (modelo tlacotzontli.glb) ---------------- */
+  // Greca del mismo color que la pulsera, un poco más oscura para que apenas se note
   var PALETAS = {
-    jade:      { nombre: 'Jade',      banda: '#1D767A', metal: '#C78B4F', base: '#123E3D', tapa: '#1F7F82' },
-    cobre:     { nombre: 'Cobre',     banda: '#8E532A', metal: '#E3C08C', base: '#3E2412', tapa: '#9C5D2F' },
-    obsidiana: { nombre: 'Obsidiana', banda: '#1E2324', metal: '#C9A45C', base: '#0F1212', tapa: '#262C2D' }
+    obsidiana: { nombre: 'Obsidiana',  correa: '#141617', lineaC: '#0C0D0E', carcasa: '#181A1B', lineaK: '#0F1011' },
+    grafito:   { nombre: 'Grafito',    correa: '#27292B', lineaC: '#1B1D1E', carcasa: '#2C2F31', lineaK: '#1F2123' },
+    noche:     { nombre: 'Azul noche', correa: '#15233B', lineaC: '#0D172A', carcasa: '#1A2B48', lineaK: '#111D33' }
   };
-  var paletaActual = 'jade';
+  var paletaActual = 'obsidiana';
 
-  if (!window.THREE) { document.body.classList.add('sin-3d'); return; }
+  if (!window.THREE || !window.THREE.GLTFLoader) { document.body.classList.add('sin-3d'); return; }
   var T = window.THREE;
-  var R = 1.25;
-  function lin(hex) { return new T.Color(hex).convertSRGBToLinear(); }
+  var cargador = new T.GLTFLoader();
 
-  function lienzoGreca(cv, pal) {
-    var g = cv.getContext('2d'), w = cv.width, h = cv.height;
-    g.fillStyle = pal.banda; g.fillRect(0, 0, w, h);
-    g.strokeStyle = pal.metal; g.lineWidth = 5; g.lineJoin = 'miter'; g.lineCap = 'square';
-    [h * 0.25, h * 0.75].forEach(function (c) {
-      g.globalAlpha = 0.85;
-      for (var x = 0; x < w; x += 64) {
-        g.beginPath();
-        g.moveTo(x, c + 22); g.lineTo(x + 64, c + 22);
-        g.moveTo(x + 6, c + 22); g.lineTo(x + 6, c - 18); g.lineTo(x + 48, c - 18);
-        g.lineTo(x + 48, c + 8); g.lineTo(x + 24, c + 8); g.lineTo(x + 24, c - 4);
-        g.stroke();
+  // Greca discreta: el mismo trazo que trae el modelo, redibujado con el color de cada paleta
+  function lienzoGreca(cv, fondo, linea) {
+    var g = cv.getContext('2d'), w = cv.width, h = cv.height, c = h * 0.5;
+    g.fillStyle = fondo; g.fillRect(0, 0, w, h);
+    g.strokeStyle = linea; g.lineWidth = 5; g.lineJoin = 'round';
+    for (var x = 0; x < w; x += 64) {
+      g.beginPath();
+      g.moveTo(x, c + 22); g.lineTo(x + 64, c + 22);
+      g.moveTo(x + 6, c + 22); g.lineTo(x + 6, c - 18); g.lineTo(x + 48, c - 18);
+      g.lineTo(x + 48, c + 8); g.lineTo(x + 24, c + 8); g.lineTo(x + 24, c - 4);
+      g.stroke();
+    }
+    g.lineWidth = 2;
+    g.beginPath(); g.moveTo(0, c - 30); g.lineTo(w, c - 30); g.moveTo(0, c + 34); g.lineTo(w, c + 34); g.stroke();
+  }
+  function texturaLienzo() {
+    var cv = document.createElement('canvas'); cv.width = 128; cv.height = 256;
+    var tx = new T.CanvasTexture(cv);
+    tx.flipY = false; tx.wrapS = tx.wrapT = T.RepeatWrapping; tx.encoding = T.sRGBEncoding; tx.anisotropy = 8;
+    return { cv: cv, tx: tx };
+  }
+
+  var bufferModelo = null;
+  function datosModelo() {
+    if (!bufferModelo) {
+      var bin = atob(window.TLACO_GLB || ''), u8 = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      bufferModelo = u8.buffer;
+    }
+    return bufferModelo;
+  }
+  function crearPulsera(alListo) {
+    if (!window.TLACO_GLB) { document.body.classList.add('sin-3d'); return; }
+    cargador.parse(datosModelo(), '', function (gltf) {
+      var raiz = gltf.scene, grupo = new T.Group();
+      grupo.add(raiz);
+      var p = {};
+      ['correa', 'carcasa', 'tapa', 'boton', 'ranura', 'placa', 'bateria', 'orificios', 'presilla'].forEach(function (n) { p[n] = raiz.getObjectByName(n); });
+      raiz.traverse(function (o) {
+        if (o.isMesh) { o.material = o.material.clone(); o.material.envMapIntensity = 0.55; }
+      });
+      raiz.updateMatrixWorld(true);
+
+      var texC = texturaLienzo(), texK = texturaLienzo();
+      p.correa.material.map = texC.tx; p.correa.material.needsUpdate = true;
+      p.carcasa.material.map = texK.tx; p.carcasa.material.needsUpdate = true;
+      var mBoton = p.boton.material;
+      mBoton.emissive = new T.Color('#FF3B2A'); mBoton.emissiveIntensity = 0;
+
+      var caja = new T.Box3().setFromObject(p.carcasa), c = caja.getCenter(new T.Vector3());
+      var foco = new T.Object3D(); foco.position.copy(c); grupo.add(foco);
+
+      // Ondas de alerta: salen del botón, sobre la cara superior
+      var cajaB = new T.Box3().setFromObject(p.boton), cb = cajaB.getCenter(new T.Vector3());
+      var ondas = [];
+      for (var i = 0; i < 3; i++) {
+        var mo = new T.MeshBasicMaterial({ color: new T.Color('#E0574B').convertSRGBToLinear(), transparent: true, opacity: 0, depthWrite: false });
+        var onda = new T.Mesh(new T.TorusGeometry(1, 0.012, 8, 128), mo);
+        onda.rotation.x = Math.PI / 2; onda.position.set(cb.x, cajaB.max.y + 0.01, cb.z); onda.userData.y = cajaB.max.y - p.boton.position.y;
+        grupo.add(onda); ondas.push(onda);
       }
-      g.globalAlpha = 0.5; g.lineWidth = 2;
-      g.beginPath(); g.moveTo(0, c - 30); g.lineTo(w, c - 30); g.moveTo(0, c + 34); g.lineTo(w, c + 34); g.stroke();
-      g.lineWidth = 5;
+      var radioBoton = (cajaB.max.x - cajaB.min.x) / 2;
+
+      // Anclas de los rótulos: a la derecha de cada pieza (se mueven con ella)
+      var anclas = {};
+      ['tapa', 'placa', 'bateria', 'carcasa'].forEach(function (n) {
+        var b = new T.Box3().setFromObject(p[n]), m = b.getCenter(new T.Vector3());
+        var a = new T.Object3D(); a.position.set(m.x + (b.max.x - m.x) * 0.45, m.y, m.z); p[n].add(a); anclas[n] = a;
+      });
+      var y0 = {}; ['tapa', 'boton', 'ranura', 'placa', 'bateria'].forEach(function (n) { y0[n] = p[n].position.y; });
+
+      function ponerPaleta(nombre) {
+        var pal = PALETAS[nombre];
+        lienzoGreca(texC.cv, pal.correa, pal.lineaC); texC.tx.needsUpdate = true;
+        lienzoGreca(texK.cv, pal.carcasa, pal.lineaK); texK.tx.needsUpdate = true;
+        p.presilla.material.color.set(pal.correa).convertSRGBToLinear();
+        p.tapa.material.color.set(pal.carcasa).convertSRGBToLinear();
+        p.boton.material.color.set(pal.carcasa).convertSRGBToLinear();
+        p.ranura.material.color.set(pal.carcasa).convertSRGBToLinear().multiplyScalar(0.7);   // ranura apenas visible
+      }
+      ponerPaleta(paletaActual);
+      alListo({ grupo: grupo, p: p, y0: y0, foco: foco, ondas: ondas, anclas: anclas, mBoton: mBoton, radioBoton: radioBoton, ponerPaleta: ponerPaleta });
+    }, function () {
+      document.body.classList.add('sin-3d');
     });
-    g.globalAlpha = 1;
-  }
-
-  function losa(w, h, prof, r, bisel) {
-    var s = new T.Shape(), x = -w / 2 + bisel, y = -h / 2 + bisel, W = w - 2 * bisel, H = h - 2 * bisel;
-    s.moveTo(x + r, y); s.lineTo(x + W - r, y); s.quadraticCurveTo(x + W, y, x + W, y + r);
-    s.lineTo(x + W, y + H - r); s.quadraticCurveTo(x + W, y + H, x + W - r, y + H);
-    s.lineTo(x + r, y + H); s.quadraticCurveTo(x, y + H, x, y + H - r);
-    s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
-    var geo = new T.ExtrudeGeometry(s, { depth: prof, bevelEnabled: true, bevelThickness: bisel, bevelSize: bisel, bevelSegments: 5, curveSegments: 18 });
-    geo.rotateX(-Math.PI / 2);
-    geo.translate(0, bisel, 0);
-    return geo;
-  }
-
-  function crearPulsera(nombrePaleta) {
-    var pal = PALETAS[nombrePaleta];
-    var grupo = new T.Group();
-
-    var cv = document.createElement('canvas'); cv.width = 128; cv.height = 384;
-    lienzoGreca(cv, pal);
-    var tex = new T.CanvasTexture(cv);
-    tex.wrapS = tex.wrapT = T.RepeatWrapping; tex.repeat.set(20, 1); tex.encoding = T.sRGBEncoding; tex.anisotropy = 8;
-
-    var mBanda = new T.MeshStandardMaterial({ map: tex, roughness: 0.55, metalness: 0.08 });
-    var mMetal = new T.MeshStandardMaterial({ color: lin(pal.metal), metalness: 1, roughness: 0.28 });
-    var mBase = new T.MeshStandardMaterial({ color: lin(pal.base), roughness: 0.6, metalness: 0.15 });
-    var mTapa = new T.MeshStandardMaterial({ color: lin(pal.tapa), roughness: 0.32, metalness: 0.2 });
-    var mBoton = new T.MeshStandardMaterial({ color: lin('#7E241D'), roughness: 0.4, metalness: 0.1, emissive: lin('#FF3B2A'), emissiveIntensity: 0 });
-    var mPcb = new T.MeshStandardMaterial({ color: lin('#1E5A45'), roughness: 0.6 });
-    var mChip = new T.MeshStandardMaterial({ color: lin('#141414'), roughness: 0.45, metalness: 0.3 });
-    var mBat = new T.MeshStandardMaterial({ color: lin('#B7B1A5'), roughness: 0.35, metalness: 0.7 });
-    var mCobre = new T.MeshStandardMaterial({ color: lin('#C98A4B'), roughness: 0.3, metalness: 1 });
-
-    var gBanda = new T.TorusGeometry(R, 0.07, 32, 220); gBanda.scale(1, 1, 4.5);
-    var banda = new T.Mesh(gBanda, mBanda); grupo.add(banda);
-
-    var disp = new T.Group(); disp.position.set(0, R + 0.02, 0); grupo.add(disp);
-    var base = new T.Mesh(losa(1.0, 0.78, 0.12, 0.18, 0.04), mBase); disp.add(base);
-    var bateria = new T.Mesh(new T.BoxGeometry(0.72, 0.07, 0.5), mBat); bateria.position.y = 0.09; disp.add(bateria);
-    var placa = new T.Group(); placa.position.y = 0.165; disp.add(placa);
-    placa.add(new T.Mesh(new T.BoxGeometry(0.84, 0.03, 0.62), mPcb));
-    var chip1 = new T.Mesh(new T.BoxGeometry(0.22, 0.035, 0.22), mChip); chip1.position.set(-0.18, 0.03, 0.02); placa.add(chip1);
-    var chip2 = new T.Mesh(new T.BoxGeometry(0.26, 0.035, 0.2), mChip); chip2.position.set(0.2, 0.03, 0.06); placa.add(chip2);
-    var antena = new T.Mesh(new T.BoxGeometry(0.62, 0.012, 0.045), mCobre); antena.position.set(0, 0.022, -0.24); placa.add(antena);
-    var superior = new T.Group(); superior.position.y = 0.2; disp.add(superior);
-    superior.add(new T.Mesh(losa(1.0, 0.78, 0.1, 0.18, 0.04), mTapa));
-    var aro = new T.Mesh(new T.TorusGeometry(0.21, 0.028, 18, 72), mMetal); aro.rotation.x = Math.PI / 2; aro.position.y = 0.185; superior.add(aro);
-    var boton = new T.Mesh(new T.CylinderGeometry(0.17, 0.17, 0.05, 56), mBoton); boton.position.y = 0.19; superior.add(boton);
-
-    // Ondas de alerta
-    var ondas = [];
-    for (var i = 0; i < 3; i++) {
-      var mo = new T.MeshBasicMaterial({ color: lin('#E0574B'), transparent: true, opacity: 0, depthWrite: false });
-      var onda = new T.Mesh(new T.TorusGeometry(0.42, 0.008, 8, 96), mo);
-      onda.rotation.x = Math.PI / 2; onda.position.y = 0.4; disp.add(onda); ondas.push(onda);
-    }
-
-    // Anclas para rótulos (a la derecha de cada pieza)
-    function ancla(padre, x, y) { var o = new T.Object3D(); o.position.set(x, y, 0); padre.add(o); return o; }
-    var anclas = {
-      superior: ancla(superior, 0.56, 0.12),
-      placa: ancla(placa, 0.5, 0.02),
-      bateria: ancla(bateria, 0.44, 0),
-      base: ancla(base, 0.56, 0.1)
-    };
-
-    function ponerPaleta(nombre) {
-      var p = PALETAS[nombre];
-      lienzoGreca(cv, p); tex.needsUpdate = true;
-      mMetal.color.copy(lin(p.metal)); mBase.color.copy(lin(p.base)); mTapa.color.copy(lin(p.tapa));
-    }
-    return { grupo: grupo, disp: disp, superior: superior, placa: placa, bateria: bateria, banda: banda, mBoton: mBoton, ondas: ondas, anclas: anclas, ponerPaleta: ponerPaleta };
   }
 
   function crearEntorno(renderer) {
     var esc = new T.Scene();
-    esc.background = lin('#1A2120');
+    esc.background = new T.Color('#1A2120');
     function panel(w, h, d, col, x, y, z) {
       var m = new T.Mesh(new T.BoxGeometry(w, h, d), new T.MeshBasicMaterial({ color: col }));
       m.position.set(x, y, z); esc.add(m);
@@ -581,13 +624,14 @@ legend b { color: var(--hueso); font-weight: 500; }
     r.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     r.outputEncoding = T.sRGBEncoding;
     r.toneMapping = T.ACESFilmicToneMapping;
-    r.toneMappingExposure = 1.05;
+    r.toneMappingExposure = 1.15;
     return r;
   }
 
   function luces(escena) {
     var clave = new T.DirectionalLight(0xfff1df, 1.6); clave.position.set(3, 5, 4); escena.add(clave);
-    var borde = new T.DirectionalLight(0xC78B4F, 1.2); borde.position.set(-4, 2, -3); escena.add(borde);
+    var borde = new T.DirectionalLight(0xC78B4F, 1.4); borde.position.set(-4, 2, -3); escena.add(borde);
+    var contra = new T.DirectionalLight(0xbfe6e0, 0.8); contra.position.set(0, -2, -5); escena.add(contra);
     escena.add(new T.AmbientLight(0x406060, 0.35));
   }
 
@@ -599,21 +643,21 @@ legend b { color: var(--hueso); font-weight: 500; }
   escena.environment = crearEntorno(renderer);
   luces(escena);
   var camara = new T.PerspectiveCamera(32, 1, 0.1, 100);
-  var modelo = crearPulsera('jade');
-  escena.add(modelo.grupo);
+  var modelo = null;
+  crearPulsera(function (m) { modelo = m; escena.add(m.grupo); });
 
   // Cielo: órbitas y satélites
   var cielo = new T.Group(); escena.add(cielo);
   var lineasCielo = [], sats = [];
   for (var k = 0; k < 3; k++) {
-    var pts = [], rad = 2.5 + k * 0.35;
+    var pts = [], rad = 2.6 + k * 0.35;
     for (var a = 0; a <= 128; a++) { var t = a / 128 * Math.PI * 2; pts.push(new T.Vector3(Math.cos(t) * rad, 0, Math.sin(t) * rad)); }
-    var lm = new T.LineBasicMaterial({ color: lin('#E3B98A'), transparent: true, opacity: 0 });
+    var lm = new T.LineBasicMaterial({ color: new T.Color('#E3B98A').convertSRGBToLinear(), transparent: true, opacity: 0 });
     var orb = new T.LineLoop(new T.BufferGeometry().setFromPoints(pts), lm);
     var piv = new T.Group(); piv.rotation.set(0.9 + k * 0.35, k * 1.2, 0.2 * k); piv.add(orb); cielo.add(piv);
     lineasCielo.push(lm);
     for (var s = 0; s < 2; s++) {
-      var sm = new T.MeshBasicMaterial({ color: lin('#F2D3A8'), transparent: true, opacity: 0 });
+      var sm = new T.MeshBasicMaterial({ color: new T.Color('#F2D3A8').convertSRGBToLinear(), transparent: true, opacity: 0 });
       var sat = new T.Mesh(new T.OctahedronGeometry(0.06), sm);
       sat.userData = { rad: rad, fase: s * Math.PI + k, vel: 0.25 + k * 0.08 };
       piv.add(sat); sats.push(sat);
@@ -622,14 +666,14 @@ legend b { color: var(--hueso); font-weight: 500; }
 
   // Fotogramas clave según el avance del scroll (0 a 1)
   var K = [
-    { p: 0.00, dist: 6.4, foco: 0.0, rx: 0.42, ry: -0.55, e: 0, pulso: 0, cielo: 0 },
-    { p: 0.16, dist: 6.0, foco: 0.0, rx: 0.36, ry: 0.55, e: 0, pulso: 0, cielo: 0 },
-    { p: 0.31, dist: 2.9, foco: 1.0, rx: 1.02, ry: 0.85, e: 0, pulso: 1, cielo: 0 },
-    { p: 0.45, dist: 3.1, foco: 1.0, rx: 0.98, ry: 1.25, e: 0, pulso: 1, cielo: 0 },
-    { p: 0.57, dist: 8.2, foco: 0.25, rx: 0.55, ry: 2.2, e: 0, pulso: 0, cielo: 1 },
-    { p: 0.70, dist: 8.4, foco: 0.25, rx: 0.5, ry: 2.8, e: 0, pulso: 0, cielo: 1 },
-    { p: 0.83, dist: 4.9, foco: 1.0, rx: 0.62, ry: 3.55, e: 1, pulso: 0, cielo: 0 },
-    { p: 1.00, dist: 5.1, foco: 1.0, rx: 0.6, ry: 3.95, e: 1, pulso: 0, cielo: 0 }
+    { p: 0.00, dist: 7.4, foco: 0.0, rx: 0.42, ry: -0.55, e: 0, pulso: 0, cielo: 0 },
+    { p: 0.16, dist: 7.0, foco: 0.0, rx: 0.36, ry: 0.5, e: 0, pulso: 0, cielo: 0 },
+    { p: 0.31, dist: 4.6, foco: 1.0, rx: 1.0, ry: 0.25, e: 0, pulso: 1, cielo: 0 },
+    { p: 0.45, dist: 4.7, foco: 1.0, rx: 0.95, ry: -0.1, e: 0, pulso: 1, cielo: 0 },
+    { p: 0.57, dist: 8.8, foco: 0.25, rx: 0.55, ry: 1.4, e: 0, pulso: 0, cielo: 1 },
+    { p: 0.70, dist: 9.0, foco: 0.25, rx: 0.5, ry: 2.4, e: 0, pulso: 0, cielo: 1 },
+    { p: 0.83, dist: 7.4, foco: 1.0, rx: 0.5, ry: 5.95, e: 1, pulso: 0, cielo: 0 },
+    { p: 1.00, dist: 7.6, foco: 1.0, rx: 0.48, ry: 6.2, e: 1, pulso: 0, cielo: 0 }
   ];
   var CAMPOS = ['dist', 'foco', 'rx', 'ry', 'e', 'pulso', 'cielo'];
   function suave(x) { return x * x * (3 - 2 * x); }
@@ -653,47 +697,30 @@ legend b { color: var(--hueso); font-weight: 500; }
   }
 
   var rotulos = Array.prototype.slice.call(document.querySelectorAll('.rotulo'));
+  var grafo = document.getElementById('grafo');
   var escenario = document.getElementById('escenario');
+  var desplazamiento = window.innerWidth > 820 ? 1 : 0;
   function ajustar() {
     var w = escenario.clientWidth, h = escenario.clientHeight;
     renderer.setSize(w, h, false);
     camara.aspect = w / h;
     camara.fov = w < 700 ? 42 : 32;
     camara.updateProjectionMatrix();
+    desplazamiento = window.innerWidth > 820 ? 1 : 0;
   }
   ajustar();
   window.addEventListener('resize', ajustar);
 
   var v = new T.Vector3(), centro = new T.Vector3(), reloj = new T.Clock(), tiempo = 0;
-  var desplazamiento = window.innerWidth > 820 ? 1 : 0;
 
   function cuadro() {
+    requestAnimationFrame(cuadro);
     var dt = Math.min(reloj.getDelta(), 0.05);
     tiempo += dt;
     var obj = objetivo(avance());
     var f = reducir ? 1 : 1 - Math.pow(0.0015, dt);
     CAMPOS.forEach(function (c) { actual[c] += (obj[c] - actual[c]) * f; });
 
-    var balanceo = reducir ? 0 : Math.sin(tiempo * 0.35) * 0.1;
-    modelo.grupo.rotation.set(actual.rx, actual.ry + balanceo, 0);
-
-    // Despiece
-    var e = actual.e;
-    modelo.superior.position.y = 0.2 + e * 1.0;
-    modelo.placa.position.y = 0.165 + e * 0.6;
-    modelo.bateria.position.y = 0.09 + e * 0.28;
-    modelo.banda.material.opacity = 1;
-
-    // Pulso del botón y ondas
-    var pul = actual.pulso;
-    modelo.mBoton.emissiveIntensity = pul * (reducir ? 0.8 : 0.55 + 0.45 * Math.sin(tiempo * 6));
-    modelo.ondas.forEach(function (o, i) {
-      var fase = reducir ? 0.4 + i * 0.2 : ((tiempo * 0.6 + i / 3) % 1);
-      o.scale.setScalar(1 + fase * 2.4);
-      o.material.opacity = pul * (1 - fase) * 0.8;
-    });
-
-    // Cielo
     lineasCielo.forEach(function (m) { m.opacity = actual.cielo * 0.45; });
     sats.forEach(function (s) {
       var d = s.userData, ang = d.fase + (reducir ? 0 : tiempo * d.vel);
@@ -703,31 +730,72 @@ legend b { color: var(--hueso); font-weight: 500; }
     });
     cielo.rotation.y = reducir ? 0 : tiempo * 0.05;
 
-    // Cámara: entre el centro del aro y el dispositivo
+    if (!modelo) { camara.position.set(0, 0.3, actual.dist); camara.lookAt(0, 0, 0); renderer.render(escena, camara); return; }
+
+    var balanceo = reducir ? 0 : Math.sin(tiempo * 0.35) * 0.1;
+    modelo.grupo.rotation.set(actual.rx, actual.ry + balanceo, 0);
+
+    // Despiece: la tapa sale con el botón
+    var e = actual.e, subeTapa = e * 1.3;
+    modelo.p.tapa.position.y = modelo.y0.tapa + subeTapa;
+    modelo.p.ranura.position.y = modelo.y0.ranura + subeTapa;
+    modelo.p.placa.position.y = modelo.y0.placa + e * 0.82;
+    modelo.p.bateria.position.y = modelo.y0.bateria + e * 0.4;
+
+    // Alerta: el botón se hunde y salen ondas; solo entonces se ilumina
+    var pul = actual.pulso, ciclo = reducir ? 0.5 : (tiempo * 0.55) % 1;
+    var hundir = ciclo < 0.14 ? Math.sin(ciclo / 0.14 * Math.PI) : 0;
+    modelo.p.boton.position.y = modelo.y0.boton + subeTapa - pul * hundir * 0.012;
+    modelo.mBoton.emissiveIntensity = pul * (0.25 + 0.75 * hundir);
+    modelo.ondas.forEach(function (o, i) {
+      var fase = reducir ? 0.3 + i * 0.25 : ((ciclo - 0.1 - i * 0.12 + 1) % 1);
+      var r = modelo.radioBoton * (1 + fase * 7);
+      o.scale.set(r, r, 1);
+      o.position.y = modelo.y0.boton + subeTapa + 0.01 + (o.userData.y || 0);
+      o.material.opacity = pul * (1 - fase) * 0.85;
+    });
+
+    // Cámara: entre el centro del aro y la cápsula
     modelo.grupo.updateMatrixWorld(true);
-    modelo.disp.getWorldPosition(v);
-    centro.set(0, 0, 0).lerp(v.add(new T.Vector3(0, 0.25, 0)), actual.foco);
-    var lado = desplazamiento * (1 - actual.foco * 0.2) * actual.dist * 0.16;
-    camara.position.set(centro.x - lado, centro.y + 0.15, centro.z + actual.dist);
-    camara.lookAt(centro.x - lado, centro.y, centro.z);
+    modelo.foco.getWorldPosition(v);
+    centro.set(0, 0, 0).lerp(v, actual.foco);
+    // Escritorio: el modelo a la derecha del texto. Celular: el modelo en la mitad de arriba.
+    var lado = desplazamiento * actual.dist * 0.2;
+    var bajar = desplazamiento ? -actual.dist * 0.05 : actual.dist * 0.17;
+    camara.position.set(centro.x - lado, centro.y + 0.15 - bajar, centro.z + actual.dist);
+    camara.lookAt(centro.x - lado, centro.y - bajar, centro.z);
 
     renderer.render(escena, camara);
 
-    // Rótulos del despiece
+    // Rótulos del despiece: cajas que flotan despacio, unidas a cada pieza como un grafo
     var w = escenario.clientWidth, h = escenario.clientHeight;
     var op = Math.min(1, Math.max(0, (e - 0.65) / 0.3));
-    rotulos.forEach(function (el) {
-      var a = modelo.anclas[el.getAttribute('data-parte')];
-      a.getWorldPosition(v); v.project(camara);
-      var x = (v.x * 0.5 + 0.5) * w, y = (-v.y * 0.5 + 0.5) * h;
-      el.style.transform = 'translate(' + Math.round(x) + 'px,' + Math.round(y - 8) + 'px)';
-      el.style.opacity = (x > w - 40) ? 0 : op;
+    var items = rotulos.map(function (el, i) {
+      var nombre = el.getAttribute('data-parte');
+      modelo.anclas[nombre].getWorldPosition(v); v.project(camara);
+      var ax = (v.x * 0.5 + 0.5) * w, ay = (-v.y * 0.5 + 0.5) * h;
+      var bw = el.offsetWidth, bh = el.offsetHeight;
+      var flota = reducir ? 0 : Math.sin(tiempo * 0.45 + i * 1.7) * 6;
+      var derecha = ax + 150 + bw < w - 12;
+      var bx = derecha ? ax + 150 : Math.max(12, ax - 150 - bw);
+      return { el: el, nombre: nombre, ax: ax, ay: ay, bx: bx, by: ay - bh / 2 + flota, bw: bw, bh: bh, derecha: derecha };
     });
-
-    requestAnimationFrame(cuadro);
+    // Separarlas para que nunca se encimen
+    items.slice().sort(function (a, b) { return a.by - b.by; }).reduce(function (prev, it) {
+      if (prev && it.by < prev.by + prev.bh + 12) it.by = prev.by + prev.bh + 12;
+      return it;
+    }, null);
+    items.forEach(function (it) {
+      it.el.style.transform = 'translate(' + Math.round(it.bx) + 'px,' + Math.round(it.by) + 'px)';
+      it.el.style.opacity = op;
+      var ln = grafo.querySelector('line[data-l="' + it.nombre + '"]'), ci = grafo.querySelector('circle[data-c="' + it.nombre + '"]');
+      var ex = it.derecha ? it.bx : it.bx + it.bw;
+      ln.setAttribute('x1', it.ax); ln.setAttribute('y1', it.ay); ln.setAttribute('x2', ex); ln.setAttribute('y2', it.by + it.bh / 2);
+      ci.setAttribute('cx', it.ax); ci.setAttribute('cy', it.ay);
+      ln.style.opacity = op; ci.style.opacity = op;
+    });
   }
   requestAnimationFrame(cuadro);
-  window.addEventListener('resize', function () { desplazamiento = window.innerWidth > 820 ? 1 : 0; });
 
   /* ---------------- Vitrina de preventa ---------------- */
   var vista = document.getElementById('vista');
@@ -739,10 +807,13 @@ legend b { color: var(--hueso); font-weight: 500; }
     esc2.environment = crearEntorno(r2);
     luces(esc2);
     var cam2 = new T.PerspectiveCamera(30, 1, 0.1, 50);
-    cam2.position.set(0, 0.6, 7.2); cam2.lookAt(0, 0.25, 0);
-    vitrinaModelo = crearPulsera('jade');
-    esc2.add(vitrinaModelo.grupo);
-    var visible = false, giro = 0, reloj2 = new T.Clock();
+    cam2.position.set(0, 0.6, 7.4); cam2.lookAt(0, 0.25, 0);
+    var visible = true, giro = 0, reloj2 = new T.Clock();
+    crearPulsera(function (m) {
+      vitrinaModelo = m; esc2.add(m.grupo);
+      m.grupo.rotation.set(0.42, -0.5, 0);
+      m.ponerPaleta(paletaActual);
+    });
     function ajustar2() {
       var w = vista.clientWidth, h = vista.clientHeight;
       r2.setSize(w, h, false); cam2.aspect = w / h; cam2.updateProjectionMatrix();
@@ -750,19 +821,16 @@ legend b { color: var(--hueso); font-weight: 500; }
     ajustar2();
     window.addEventListener('resize', ajustar2);
     function cuadro2() {
-      var dt = Math.min(reloj2.getDelta(), 0.05);
-      if (visible) {
-        if (!reducir) giro += dt * 0.45;
-        vitrinaModelo.grupo.rotation.set(0.42, -0.5 + giro, 0);
-        r2.render(esc2, cam2);
-      }
       requestAnimationFrame(cuadro2);
+      var dt = Math.min(reloj2.getDelta(), 0.05);
+      if (!visible || !vitrinaModelo) return;
+      if (!reducir) giro += dt * 0.45;
+      vitrinaModelo.grupo.rotation.set(0.42, -0.5 + giro, 0);
+      r2.render(esc2, cam2);
     }
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (ent) { visible = ent[0].isIntersecting; }, { rootMargin: '100px' }).observe(vista);
-    } else { visible = true; }
-    vitrinaModelo.grupo.rotation.set(0.42, -0.5, 0);
-    r2.render(esc2, cam2);
+    }
     requestAnimationFrame(cuadro2);
   }
 
@@ -770,7 +838,7 @@ legend b { color: var(--hueso); font-weight: 500; }
     inp.addEventListener('change', function () {
       paletaActual = inp.value;
       document.getElementById('nombre-color').textContent = PALETAS[paletaActual].nombre;
-      modelo.ponerPaleta(paletaActual);
+      if (modelo) modelo.ponerPaleta(paletaActual);
       if (vitrinaModelo) vitrinaModelo.ponerPaleta(paletaActual);
     });
   });
