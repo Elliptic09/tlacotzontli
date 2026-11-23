@@ -1,4 +1,13 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Tlacotzontli: dispositivo de seguridad infantil con ubicación en tiempo real y botón de pánico.">
+<link rel="icon" href="logo.png">
+<style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
 <title>Tlacotzontli</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -430,7 +439,6 @@ legend b { color: var(--hueso); font-weight: 500; }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="modelo.js"></script>
 <script>
 (function () {
   'use strict';
@@ -467,7 +475,12 @@ legend b { color: var(--hueso); font-weight: 500; }
     document.getElementById('texto-contador').textContent = n === 1 ? 'persona interesada' : 'personas interesadas';
     contador.hidden = false;
   }
-  if (window.claude && typeof window.claude.use === 'function') {
+  if (!(window.claude && typeof window.claude.use === 'function')) {
+    form.hidden = true;
+    document.querySelector('.nota').hidden = true;
+    aviso.hidden = false;
+    aviso.textContent = 'La preventa abrirá pronto.';
+  } else {
     window.claude.use('user').then(function (u) { return u ? u.id() : null; }).then(function (id) { miId = id; }).catch(function () {});
     window.claude.use('db').then(function (d) {
       if (!d) return;
@@ -537,18 +550,8 @@ legend b { color: var(--hueso); font-weight: 500; }
     return { cv: cv, tx: tx };
   }
 
-  var bufferModelo = null;
-  function datosModelo() {
-    if (!bufferModelo) {
-      var bin = atob(window.TLACO_GLB || ''), u8 = new Uint8Array(bin.length);
-      for (var i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
-      bufferModelo = u8.buffer;
-    }
-    return bufferModelo;
-  }
   function crearPulsera(alListo) {
-    if (!window.TLACO_GLB) { document.body.classList.add('sin-3d'); return; }
-    cargador.parse(datosModelo(), '', function (gltf) {
+    cargador.load('tlacotzontli.glb', function (gltf) {
       var raiz = gltf.scene, grupo = new T.Group();
       grupo.add(raiz);
       var p = {};
@@ -597,7 +600,7 @@ legend b { color: var(--hueso); font-weight: 500; }
       }
       ponerPaleta(paletaActual);
       alListo({ grupo: grupo, p: p, y0: y0, foco: foco, ondas: ondas, anclas: anclas, mBoton: mBoton, radioBoton: radioBoton, ponerPaleta: ponerPaleta });
-    }, function () {
+    }, undefined, function () {
       document.body.classList.add('sin-3d');
     });
   }
@@ -845,4 +848,5 @@ legend b { color: var(--hueso); font-weight: 500; }
 })();
 </script>
 
-</body></html>
+</body>
+</html>
