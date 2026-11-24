@@ -201,6 +201,52 @@ legend b { color: var(--hueso); font-weight: 500; }
 .pie nav { display: flex; flex-wrap: wrap; gap: 10px 24px; }
 .pie nav a { color: var(--ceniza); text-decoration: none; font-size: .9rem; }
 .pie nav a:hover { color: var(--hueso); }
+
+/* ---------- Equipo: credenciales de obsidiana con grietas de lava ---------- */
+.equipo { background: var(--obsidiana-2); border-top: 1px solid var(--linea); }
+.equipo .cabeza { margin-bottom: 28px; }
+.carrusel { position: relative; overflow: hidden; padding-bottom: 36px; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent); }
+.carrusel.arrastrando { cursor: grabbing; }
+.gafetes { list-style: none; margin: 0; padding: 18px 0 0; display: flex; gap: 30px; width: max-content; will-change: transform; }
+.carrusel::before { content: ""; position: absolute; left: 0; right: 0; top: 10px; z-index: 1; height: 6px; border-radius: 3px; background: linear-gradient(to bottom, #6b6f70, #2a2d2e); box-shadow: 0 4px 10px rgba(0,0,0,.6); }
+.gafete { position: relative; z-index: 2; flex: none; width: 250px; display: flex; flex-direction: column; align-items: center; transform-origin: 50% 0; will-change: transform; }
+.cordon { width: 2px; height: 64px; background: linear-gradient(to bottom, #8a8f90, #3a3e3f); position: relative; }
+.cordon::before { content: ""; position: absolute; top: -9px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; border: 2px solid #9a9fa0; background: var(--obsidiana); }
+.cordon::after { content: ""; position: absolute; bottom: -4px; left: 50%; width: 22px; height: 10px; margin-left: -11px; border-radius: 3px; background: linear-gradient(#9da2a3, #55595a); }
+.tarjeta { all: unset; box-sizing: border-box; display: block; width: 100%; aspect-ratio: 25 / 38; perspective: 900px; cursor: pointer; border-radius: 16px; }
+.tarjeta:focus-visible { outline: 2px solid var(--cobre-claro); outline-offset: 6px; }
+.interior { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.2,.7,.2,1); transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
+.tarjeta[aria-pressed="true"] .interior { transform: rotateX(var(--rx, 0deg)) rotateY(calc(180deg + var(--ry, 0deg))); }
+.cara { position: absolute; inset: 0; border-radius: 16px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; padding: 22px 14px 14px; gap: 8px;
+  background: radial-gradient(120% 80% at 25% 15%, #2b3032 0%, #121415 45%, #070808 100%);
+  border: 1px solid #2c3133; box-shadow: 0 30px 60px -25px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.06); }
+.cara::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(160deg, rgba(255,255,255,.08) 0%, transparent 28%), radial-gradient(60% 40% at 80% 90%, rgba(255,255,255,.04), transparent 70%); }
+.reverso { transform: rotateY(180deg); justify-content: space-between; text-align: center; gap: 10px; padding: 18px 12px 14px; }
+.ranura-clip { width: 34px; height: 7px; border-radius: 4px; background: #050606; box-shadow: inset 0 1px 2px rgba(0,0,0,.9), 0 1px 0 rgba(255,255,255,.08); flex-shrink: 0; position: relative; z-index: 3; }
+.lava { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; animation: lava 6s ease-in-out infinite; }
+@keyframes lava { 0%, 100% { filter: brightness(.9) saturate(1.05); } 50% { filter: brightness(1.18) saturate(1.25); } }
+.holo { position: absolute; inset: 0; pointer-events: none; z-index: 4; mix-blend-mode: screen; opacity: .55;
+  background: linear-gradient(115deg, transparent 22%, rgba(255,110,50,.22) 36%, rgba(120,210,255,.16) 46%, rgba(255,215,140,.2) 56%, transparent 70%);
+  background-size: 260% 260%; background-position: calc(var(--mx, .5) * 100%) calc(var(--my, .5) * 100%); }
+.mini-marca { font-family: var(--display); font-weight: 700; font-size: .62rem; letter-spacing: .3em; color: #F1E4C8; text-shadow: 0 1px 6px #000; padding: 3px 10px; border-radius: 999px; background: rgba(6,6,7,.7); position: relative; z-index: 3; }
+.retrato { position: relative; z-index: 2; width: 74%; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,90,30,.55); box-shadow: 0 0 0 4px rgba(0,0,0,.7), 0 0 22px rgba(255,50,0,.35); background: #0b0c0d; }
+.retrato img, .retrato svg { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(.85) contrast(1.08) brightness(.92) sepia(.25); }
+.retrato svg { filter: none; }
+.placa-texto { position: relative; z-index: 3; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 9px 8px; border-radius: 10px; background: rgba(6,6,7,.82); border: 1px solid rgba(255,255,255,.06); box-shadow: 0 6px 18px rgba(0,0,0,.6); }
+.nombre { position: relative; z-index: 3; font-family: var(--display); font-weight: 600; font-size: .9rem; line-height: 1.2; text-align: center; color: var(--hueso); text-shadow: 0 2px 8px #000; }
+.puesto { position: relative; z-index: 3; font-family: var(--dato); font-size: .66rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; text-align: center; color: #F1E4C8; }
+.franja { position: relative; z-index: 3; margin-top: auto; width: 100%; height: 12px; opacity: .8;
+  background: repeating-linear-gradient(90deg, var(--cobre) 0 2px, transparent 2px 5px, var(--cobre) 5px 6px, transparent 6px 10px); border-radius: 2px; }
+.reverso h3 { position: relative; z-index: 3; font-size: .86rem; line-height: 1.25; letter-spacing: .01em; }
+.reverso p { position: relative; z-index: 3; font-size: .76rem; line-height: 1.45; color: #D9DEDB; }
+.reverso .contenido { position: relative; z-index: 3; display: flex; flex-direction: column; gap: 8px; margin: auto 0; padding: 14px 12px; border-radius: 12px; background: rgba(6,6,7,.84); border: 1px solid rgba(255,255,255,.06); }
+.reverso .puesto { font-size: .68rem; }
+.voltear { position: relative; z-index: 3; font-family: var(--dato); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: #F1E4C8; margin-top: auto; padding: 5px 10px; border-radius: 999px; background: rgba(6,6,7,.82); }
+.asesores { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: baseline; color: var(--ceniza); font-size: .95rem; }
+.asesores b { font-family: var(--dato); font-weight: 500; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cobre-claro); }
+@media (max-width: 620px) { .gafete { width: 220px; } .gafetes { gap: 20px; } .cordon { height: 48px; } }
+@media (prefers-reduced-motion: reduce) { .lava { animation: none; } .interior { transition: none; } }
 </style>
 
 <header class="encabezado">
@@ -213,6 +259,7 @@ legend b { color: var(--hueso); font-weight: 500; }
       <a href="#primeras-horas">Primeras horas</a>
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#especificaciones">Especificaciones</a>
+      <a href="#equipo">Equipo</a>
     </nav>
     <a class="boton boton-cobre" href="#preventa">Apartar</a>
   </div>
@@ -432,6 +479,193 @@ legend b { color: var(--hueso); font-weight: 500; }
       </div>
     </div>
   </section>
+
+  <svg class="greca" aria-hidden="true" preserveAspectRatio="none" viewBox="0 0 520 22">
+    <defs><pattern id="patron-greca-2" width="26" height="22" patternUnits="userSpaceOnUse"><path d="M0 18 H9 V4 H21 V12 H15 V8" fill="none" stroke="currentColor" stroke-width="2"></path></pattern></defs>
+    <rect width="520" height="22" fill="url(#patron-greca-2)"></rect>
+  </svg>
+  <section class="seccion equipo" id="equipo">
+    <div class="envoltura">
+      <div class="cabeza">
+        <span class="etiqueta">Equipo</span>
+        <h2>Conoce a nuestro equipo.</h2>
+        <p>Toca una credencial para ver qué hace cada quien. Arrástralas para moverlas.</p>
+      </div>
+    </div>
+    <div class="carrusel" id="carrusel">
+      <ul class="gafetes" id="gafetes">
+        <li class="gafete">
+          <div class="cordon"></div>
+          <button class="tarjeta" type="button" aria-pressed="false" aria-label="Jonathan Olaf Elizalde Andrade, Director Ejecutivo. Ver su función">
+            <span class="interior">
+              <span class="cara frente">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="ranura-clip"></span>
+                <span class="mini-marca">TLACOTZONTLI</span>
+                <span class="retrato"><img src="equipo/jonathan.jpg" alt="Foto de Jonathan Olaf Elizalde Andrade" loading="lazy"></span>
+                <span class="placa-texto"><span class="nombre">Jonathan Olaf<br>Elizalde Andrade</span><span class="puesto">Director Ejecutivo · CEO</span></span>
+                <span class="franja"></span>
+                <span class="holo"></span>
+              </span>
+              <span class="cara reverso">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="contenido"><span class="puesto">Director Ejecutivo · CEO</span>
+                <h3>Jonathan Olaf Elizalde Andrade</h3>
+                <p>Define la estrategia, coordina a las áreas y representa a Tlacotzontli ante inversionistas, escuelas y autoridades. Lidera el desarrollo del hardware.</p></span>
+                <span class="voltear">Toca para voltear</span>
+                <span class="holo"></span>
+              </span>
+            </span>
+          </button>
+        </li>
+        <li class="gafete">
+          <div class="cordon"></div>
+          <button class="tarjeta" type="button" aria-pressed="false" aria-label="Erik Adnachiel Espinosa Román, Administración y Finanzas. Ver su función">
+            <span class="interior">
+              <span class="cara frente">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="ranura-clip"></span>
+                <span class="mini-marca">TLACOTZONTLI</span>
+                <span class="retrato"><img src="equipo/erik.jpg" alt="Foto de Erik Adnachiel Espinosa Román" loading="lazy"></span>
+                <span class="placa-texto"><span class="nombre">Erik Adnachiel<br>Espinosa Román</span><span class="puesto">Administración y Finanzas · CFO</span></span>
+                <span class="franja"></span>
+                <span class="holo"></span>
+              </span>
+              <span class="cara reverso">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="contenido"><span class="puesto">Administración y Finanzas · CFO</span>
+                <h3>Erik Adnachiel Espinosa Román</h3>
+                <p>Elabora el presupuesto y la evaluación financiera, define precios junto con el CEO y busca financiamiento.</p></span>
+                <span class="voltear">Toca para voltear</span>
+                <span class="holo"></span>
+              </span>
+            </span>
+          </button>
+        </li>
+        <li class="gafete">
+          <div class="cordon"></div>
+          <button class="tarjeta" type="button" aria-pressed="false" aria-label="Fernando Angel Bartolo Ramírez, Director de Tecnología. Ver su función">
+            <span class="interior">
+              <span class="cara frente">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="ranura-clip"></span>
+                <span class="mini-marca">TLACOTZONTLI</span>
+                <span class="retrato">
+                  <svg viewBox="0 0 240 300" role="img" aria-label="Retrato ilustrado de estilo prehispánico con tocado de jaguar">
+                    <defs><radialGradient id="fondoJ" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#2a2421"></stop><stop offset="1" stop-color="#0b0c0d"></stop></radialGradient></defs>
+                    <rect width="240" height="300" fill="url(#fondoJ)"></rect>
+                    <g fill="none" stroke="#C9A45C" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+                      <path d="M56 112 Q60 52 120 46 Q180 52 184 112 Z" fill="#17191a"></path>
+                      <path d="M70 62 L60 34 L88 52 M170 62 L180 34 L152 52"></path>
+                      <circle cx="96" cy="76" r="5" fill="#C9A45C"></circle><circle cx="120" cy="66" r="5" fill="#C9A45C"></circle><circle cx="144" cy="76" r="5" fill="#C9A45C"></circle><circle cx="108" cy="94" r="4" fill="#C9A45C"></circle><circle cx="132" cy="94" r="4" fill="#C9A45C"></circle>
+                      <rect x="54" y="108" width="132" height="20" rx="3" fill="#1d2021"></rect>
+                      <path d="M60 124 h10 v-10 h12 v6 h-6 M90 124 h10 v-10 h12 v6 h-6 M120 124 h10 v-10 h12 v6 h-6 M150 124 h10 v-10 h12 v6 h-6" stroke-width="2"></path>
+                      <path d="M72 130 Q72 128 120 128 Q168 128 168 130 L163 205 Q156 246 120 256 Q84 246 77 205 Z" fill="#1d2021"></path>
+                      <path d="M90 162 Q102 151 114 162 Q102 168 90 162 Z M126 162 Q138 151 150 162 Q138 168 126 162 Z" fill="#0b0c0d"></path>
+                      <circle cx="102" cy="161" r="3" fill="#FFB27A" stroke="none"></circle><circle cx="138" cy="161" r="3" fill="#FFB27A" stroke="none"></circle>
+                      <path d="M86 148 L114 150 M154 148 L126 150" stroke-width="2.5"></path>
+                      <path d="M120 166 L113 196 Q120 202 127 196 Z"></path>
+                      <path d="M103 220 Q120 228 137 220"></path>
+                      <circle cx="68" cy="176" r="12" fill="#1d2021"></circle><circle cx="68" cy="176" r="4"></circle>
+                      <circle cx="172" cy="176" r="12" fill="#1d2021"></circle><circle cx="172" cy="176" r="4"></circle>
+                      <path d="M62 272 Q120 300 178 272"></path>
+                      <circle cx="84" cy="281" r="5" fill="#1D767A"></circle><circle cx="102" cy="287" r="5" fill="#1D767A"></circle><circle cx="120" cy="289" r="5" fill="#1D767A"></circle><circle cx="138" cy="287" r="5" fill="#1D767A"></circle><circle cx="156" cy="281" r="5" fill="#1D767A"></circle>
+                    </g>
+                    <path d="M150 140 l8 14 l-5 10 l9 14 M84 214 l-6 10 l4 12" fill="none" stroke="#FF6A2A" stroke-width="1.6" stroke-linecap="round"></path>
+                  </svg>
+                </span>
+                <span class="placa-texto"><span class="nombre">Fernando Angel<br>Bartolo Ramírez</span><span class="puesto">Director de Tecnología · CTO</span></span>
+                <span class="franja"></span>
+                <span class="holo"></span>
+              </span>
+              <span class="cara reverso">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="contenido"><span class="puesto">Director de Tecnología · CTO</span>
+                <h3>Fernando Angel Bartolo Ramírez</h3>
+                <p>Integra el firmware, la aplicación y la nube, y coordina el desarrollo de inteligencia artificial.</p></span>
+                <span class="voltear">Toca para voltear</span>
+                <span class="holo"></span>
+              </span>
+            </span>
+          </button>
+        </li>
+        <li class="gafete">
+          <div class="cordon"></div>
+          <button class="tarjeta" type="button" aria-pressed="false" aria-label="Andrés Arturo Ambriz López, Producto y Operaciones. Ver su función">
+            <span class="interior">
+              <span class="cara frente">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="ranura-clip"></span>
+                <span class="mini-marca">TLACOTZONTLI</span>
+                <span class="retrato"><img src="equipo/andres.jpg" alt="Foto de Andrés Arturo Ambriz López" loading="lazy"></span>
+                <span class="placa-texto"><span class="nombre">Andrés Arturo<br>Ambriz López</span><span class="puesto">Producto y Operaciones</span></span>
+                <span class="franja"></span>
+                <span class="holo"></span>
+              </span>
+              <span class="cara reverso">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="contenido"><span class="puesto">Product Manager</span>
+                <h3>Andrés Arturo Ambriz López</h3>
+                <p>Define el producto y coordina su fabricación, los proveedores y las operaciones para llevar el prototipo a manos de las familias.</p></span>
+                <span class="voltear">Toca para voltear</span>
+                <span class="holo"></span>
+              </span>
+            </span>
+          </button>
+        </li>
+        <li class="gafete">
+          <div class="cordon"></div>
+          <button class="tarjeta" type="button" aria-pressed="false" aria-label="Emiliano Torres Teran, Desarrollador de IA. Ver su función">
+            <span class="interior">
+              <span class="cara frente">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="ranura-clip"></span>
+                <span class="mini-marca">TLACOTZONTLI</span>
+                <span class="retrato">
+                  <svg viewBox="0 0 240 300" role="img" aria-label="Retrato ilustrado de estilo prehispánico con penacho de plumas">
+                    <defs><radialGradient id="fondoP" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#1f2a2a"></stop><stop offset="1" stop-color="#0b0c0d"></stop></radialGradient></defs>
+                    <rect width="240" height="300" fill="url(#fondoP)"></rect>
+                    <g fill="#141617" stroke="#C9A45C" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+                      <path d="M120 108 L120 14 Q130 60 126 108 Z"></path>
+                      <path d="M106 110 L82 22 Q102 62 114 108 Z"></path><path d="M134 110 L158 22 Q138 62 126 108 Z"></path>
+                      <path d="M94 112 L48 42 Q82 74 102 110 Z"></path><path d="M146 112 L192 42 Q158 74 138 110 Z"></path>
+                      <path d="M84 116 L30 76 Q66 96 92 114 Z"></path><path d="M156 116 L210 76 Q174 96 148 114 Z"></path>
+                      <rect x="58" y="104" width="124" height="24" rx="3" fill="#1d2021"></rect>
+                      <circle cx="120" cy="116" r="8" fill="#1D767A"></circle>
+                      <path d="M66 116 h20 M154 116 h20" stroke-width="2"></path>
+                      <path d="M72 130 Q72 128 120 128 Q168 128 168 130 L164 204 Q158 246 120 256 Q82 246 76 204 Z" fill="#1d2021"></path>
+                      <path d="M90 160 Q102 149 114 160 Q102 166 90 160 Z M126 160 Q138 149 150 160 Q138 166 126 160 Z" fill="#0b0c0d"></path>
+                      <path d="M120 166 L113 196 Q120 202 127 196 Z"></path>
+                      <path d="M104 220 Q120 226 136 220"></path>
+                      <path d="M66 166 v26 M174 166 v26" stroke-width="5"></path>
+                      <path d="M62 272 Q120 300 178 272"></path>
+                      <path d="M100 282 l20 12 l20 -12" fill="none"></path>
+                    </g>
+                    <circle cx="102" cy="159" r="3" fill="#FFB27A"></circle><circle cx="138" cy="159" r="3" fill="#FFB27A"></circle>
+                    <path d="M88 140 l10 6 l-4 9 M150 214 l8 8 l-2 12" fill="none" stroke="#FF6A2A" stroke-width="1.6" stroke-linecap="round"></path>
+                  </svg>
+                </span>
+                <span class="placa-texto"><span class="nombre">Emiliano<br>Torres Teran</span><span class="puesto">Desarrollador de IA</span></span>
+                <span class="franja"></span>
+                <span class="holo"></span>
+              </span>
+              <span class="cara reverso">
+                <canvas class="lava" aria-hidden="true"></canvas>
+                <span class="contenido"><span class="puesto">Desarrollador de IA</span>
+                <h3>Emiliano Torres Teran</h3>
+                <p>Desarrolla las funciones de inteligencia artificial y las integra con el firmware y la aplicación, junto con el CTO.</p></span>
+                <span class="voltear">Toca para voltear</span>
+                <span class="holo"></span>
+              </span>
+            </span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="envoltura">
+      <p class="asesores"><b>Asesores</b><span>Dr. Víctor García Gradilla</span><span>M.C. Aritz Barrondo</span></p>
+    </div>
+  </section>
 </main>
 
 <footer class="pie">
@@ -443,6 +677,7 @@ legend b { color: var(--hueso); font-weight: 500; }
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#especificaciones">Especificaciones</a>
       <a href="#preventa">Preventa</a>
+      <a href="#equipo">Equipo</a>
     </nav>
   </div>
 </footer>
@@ -858,6 +1093,209 @@ legend b { color: var(--hueso); font-weight: 500; }
       if (vitrinaModelo) vitrinaModelo.ponerPaleta(paletaActual);
     });
   });
+})();
+</script>
+
+<script>
+/* Credenciales del equipo: grietas de lava, vaivén con física y volteo al tocar */
+(function () {
+  'use strict';
+  var lista = document.getElementById('gafetes');
+  if (!lista) return;
+  var reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var gafetes = Array.prototype.slice.call(lista.querySelectorAll('.gafete'));
+
+  // Lava: costra de roca partida en placas, con canales incandescentes entre ellas
+  function aleatorio(semilla) {
+    return function () { semilla = (semilla * 9301 + 49297) % 233280; return semilla / 233280; };
+  }
+  function pintarLava(cv, semilla) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = cv.offsetWidth, H = cv.offsetHeight;
+    if (!W || !H) return;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    var g = cv.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var r = aleatorio(semilla);
+    var cols = 4, filas = 6, P = [];
+    for (var j = 0; j <= filas; j++) {
+      P[j] = [];
+      for (var i = 0; i <= cols; i++) {
+        var borde = i === 0 || i === cols || j === 0 || j === filas;
+        var x = (i / cols) * W + (borde ? 0 : (r() - 0.5) * W / cols * 0.7);
+        var y = (j / filas) * H + (borde ? 0 : (r() - 0.5) * H / filas * 0.7);
+        if (i === 0) x = -8; if (i === cols) x = W + 8; if (j === 0) y = -8; if (j === filas) y = H + 8;
+        P[j][i] = [x, y];
+      }
+    }
+    // Arista irregular entre dos vértices (siempre igual para la misma arista)
+    var cache = {};
+    function arista(a, b, clave) {
+      if (cache[clave]) return cache[clave];
+      var pts = [a], n = 5, dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1;
+      for (var k = 1; k < n; k++) {
+        var t = k / n, off = (r() - 0.5) * L * 0.22;
+        pts.push([a[0] + dx * t - dy / L * off, a[1] + dy * t + dx / L * off]);
+      }
+      pts.push(b);
+      return (cache[clave] = pts);
+    }
+    // Roca base
+    g.fillStyle = '#060606'; g.fillRect(0, 0, W, H);
+    // Canales de lava (debajo de las placas): rojo profundo, naranja y núcleo amarillo
+    var aristas = [];
+    for (var j2 = 0; j2 <= filas; j2++) for (var i2 = 0; i2 <= cols; i2++) {
+      if (i2 < cols) aristas.push(arista(P[j2][i2], P[j2][i2 + 1], 'h' + j2 + '_' + i2));
+      if (j2 < filas) aristas.push(arista(P[j2][i2], P[j2 + 1][i2], 'v' + j2 + '_' + i2));
+    }
+    function trazar(pts) { g.beginPath(); g.moveTo(pts[0][0], pts[0][1]); for (var q = 1; q < pts.length; q++) g.lineTo(pts[q][0], pts[q][1]); }
+    var calor = aristas.map(function (pts) {
+      var y = (pts[0][1] + pts[pts.length - 1][1]) / 2 / H;
+      return Math.min(1, 0.04 + Math.pow(y, 1.6) * 1.0 + r() * 0.28);   // más lava hacia abajo
+    });
+    g.lineCap = 'round'; g.lineJoin = 'round';
+    [[4.5, 'rgba(185,12,0,0.5)', 8], [2.2, 'rgba(255,40,0,0.85)', 5], [1.1, '#FF6A00', 2], [0.45, '#FFD27A', 0]].forEach(function (capa) {
+      aristas.forEach(function (pts, k) {
+        var c = calor[k];
+        g.save();
+        g.lineWidth = capa[0] * (0.35 + c * 0.9);
+        g.strokeStyle = capa[1];
+        g.globalAlpha = Math.min(1, c * 1.15);
+        g.shadowColor = 'rgba(255,40,0,0.9)'; g.shadowBlur = capa[2];
+        trazar(pts); g.stroke();
+        g.restore();
+      });
+    });
+    // Placas de roca encima, un poco más chicas para dejar ver los canales
+    for (var j3 = 0; j3 < filas; j3++) for (var i3 = 0; i3 < cols; i3++) {
+      var A = arista(P[j3][i3], P[j3][i3 + 1], 'h' + j3 + '_' + i3);
+      var B = arista(P[j3][i3 + 1], P[j3 + 1][i3 + 1], 'v' + j3 + '_' + (i3 + 1));
+      var C = arista(P[j3 + 1][i3], P[j3 + 1][i3 + 1], 'h' + (j3 + 1) + '_' + i3).slice().reverse();
+      var D = arista(P[j3][i3], P[j3 + 1][i3], 'v' + j3 + '_' + i3).slice().reverse();
+      var poli = A.concat(B.slice(1), C.slice(1), D.slice(1));
+      var cx = 0, cy = 0; poli.forEach(function (p) { cx += p[0]; cy += p[1]; }); cx /= poli.length; cy /= poli.length;
+      var ancho = 0.8 + (1 - Math.min(1, cy / H)) * 0.4;
+      g.save();
+      g.beginPath();
+      poli.forEach(function (p, q) {
+        var dx = p[0] - cx, dy = p[1] - cy, d = Math.hypot(dx, dy) || 1;
+        var x = p[0] - dx / d * ancho, y = p[1] - dy / d * ancho;
+        if (q) g.lineTo(x, y); else g.moveTo(x, y);
+      });
+      g.closePath();
+      var gr = g.createRadialGradient(cx - 10, cy - 14, 2, cx, cy, Math.max(W / cols, H / filas));
+      gr.addColorStop(0, '#26292a'); gr.addColorStop(0.55, '#141516'); gr.addColorStop(1, '#0a0a0b');
+      g.fillStyle = gr; g.fill();
+      // borde caliente de la placa
+      g.strokeStyle = 'rgba(255,70,10,' + (0.12 + Math.min(1, cy / H) * 0.3).toFixed(2) + ')'; g.lineWidth = 1; g.stroke();
+      g.restore();
+    }
+  }
+  var lienzosLava = Array.prototype.slice.call(lista.querySelectorAll('.lava'));
+  function pintarTodas() { lienzosLava.forEach(function (cv, i) { pintarLava(cv, 23 + Math.floor(i / 2) * 97 + (i % 2) * 7); }); }
+  pintarTodas();
+  var tLava;
+  window.addEventListener('resize', function () { clearTimeout(tLava); tLava = setTimeout(pintarTodas, 200); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(pintarTodas);
+
+  // Carrusel infinito: se duplica la fila para que nunca se acabe
+  var carrusel = document.getElementById('carrusel');
+  var originales = Array.prototype.slice.call(lista.children);
+  function agregarCopia() {
+    originales.forEach(function (li) {
+      var copia = li.cloneNode(true);
+      copia.setAttribute('aria-hidden', 'true');
+      copia.querySelector('.tarjeta').tabIndex = -1;
+      lista.appendChild(copia);
+    });
+  }
+  agregarCopia();
+  function anchoDelSet() { var hijos = lista.children; return hijos[originales.length].offsetLeft - hijos[0].offsetLeft; }
+  // Que siempre haya tarjetas de sobra, aun en pantallas muy anchas
+  for (var c = 0; c < 6 && lista.scrollWidth < carrusel.clientWidth + 2 * anchoDelSet(); c++) agregarCopia();
+  lienzosLava = Array.prototype.slice.call(lista.querySelectorAll('.lava'));
+  pintarTodas();
+  var gafetes = Array.prototype.slice.call(lista.querySelectorAll('.gafete'));
+
+  // Volteo (se ignora si fue un arrastre)
+  var arrastrado = false;
+  gafetes.forEach(function (g) {
+    var b = g.querySelector('.tarjeta');
+    b.addEventListener('click', function (e) {
+      if (arrastrado) { e.preventDefault(); return; }
+      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+    });
+  });
+
+  // Inclinación y brillo holográfico bajo el cursor
+  gafetes.forEach(function (g) {
+    var t = g.querySelector('.tarjeta'), interior = g.querySelector('.interior');
+    t.addEventListener('pointermove', function (e) {
+      var r = t.getBoundingClientRect(), mx = (e.clientX - r.left) / r.width, my = (e.clientY - r.top) / r.height;
+      interior.style.setProperty('--ry', ((mx - 0.5) * 18).toFixed(1) + 'deg');
+      interior.style.setProperty('--rx', ((0.5 - my) * 14).toFixed(1) + 'deg');
+      interior.querySelectorAll('.holo').forEach(function (h) { h.style.setProperty('--mx', mx.toFixed(3)); h.style.setProperty('--my', my.toFixed(3)); });
+    });
+    t.addEventListener('pointerleave', function () { interior.style.setProperty('--ry', '0deg'); interior.style.setProperty('--rx', '0deg'); });
+  });
+
+  // Movimiento del riel: avance constante, se frena con el cursor encima y se puede arrastrar
+  var desplaz = 0, vel = 0, velPrev = 0, crucero = reducir ? 0 : 38, encima = false;
+  var arrastre = null;
+  carrusel.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') encima = true; });
+  carrusel.addEventListener('pointerleave', function () { encima = false; });
+  carrusel.addEventListener('pointerdown', function (e) {
+    arrastre = { x: e.clientX, d0: desplaz, t: performance.now(), ultX: e.clientX, v: 0 };
+    arrastrado = false;
+  });
+  window.addEventListener('pointermove', function (e) {
+    if (!arrastre) return;
+    var dx = e.clientX - arrastre.x;
+    if (Math.abs(dx) > 6 && !arrastrado) { arrastrado = true; carrusel.classList.add('arrastrando'); }
+    if (!arrastrado) return;
+    var ahora = performance.now(), dt = Math.max(8, ahora - arrastre.t) / 1000;
+    arrastre.v = -(e.clientX - arrastre.ultX) / dt;
+    arrastre.ultX = e.clientX; arrastre.t = ahora;
+    desplaz = arrastre.d0 - dx;
+  });
+  window.addEventListener('pointerup', function () {
+    if (!arrastre) return;
+    if (arrastrado) vel = Math.max(-1500, Math.min(1500, arrastre.v));
+    arrastre = null;
+    carrusel.classList.remove('arrastrando');
+    setTimeout(function () { arrastrado = false; }, 0);
+  });
+
+  var estado = gafetes.map(function (g, i) { return { ang: 0, angVel: 0, fase: i * 1.3, el: g }; });
+  var visible = true;
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(carrusel);
+  var antes = performance.now(), t0 = antes, desplazPrev = 0;
+  function paso(ahora) {
+    requestAnimationFrame(paso);
+    var dt = Math.min((ahora - antes) / 1000, 0.05); antes = ahora;
+    if (!visible) return;
+    var anchoSet = anchoDelSet();
+    if (!arrastre) {
+      var objetivo = encima ? 6 : crucero;
+      vel += (objetivo - vel) * Math.min(1, dt * 2.2);   // inercia hacia la velocidad de crucero
+      desplaz += vel * dt;
+    }
+    var velRiel = (desplaz - desplazPrev) / Math.max(dt, 0.001);
+    var accRiel = (velRiel - velPrev) / Math.max(dt, 0.001);
+    desplazPrev = desplaz; velPrev = velRiel;
+    if (anchoSet > 0) { desplaz = ((desplaz % anchoSet) + anchoSet) % anchoSet; desplazPrev = desplaz; }
+    lista.style.transform = 'translateX(' + (-desplaz).toFixed(1) + 'px)';
+    if (reducir) return;
+    var t = (ahora - t0) / 1000;
+    estado.forEach(function (s) {
+      // El péndulo responde a la aceleración del riel (se queda atrás al acelerar) y a una brisa suave
+      var brisa = Math.sin(t * 0.7 + s.fase) * 1.6;
+      var acc = -16 * s.ang - 2.2 * s.angVel + brisa + Math.max(-900, Math.min(900, accRiel)) * 0.02 - velRiel * 0.004;
+      s.angVel += acc * dt;
+      s.ang = Math.max(-16, Math.min(16, s.ang + s.angVel * dt));
+      s.el.style.transform = 'rotate(' + s.ang.toFixed(2) + 'deg)';
+    });
+  }
+  requestAnimationFrame(paso);
 })();
 </script>
 
