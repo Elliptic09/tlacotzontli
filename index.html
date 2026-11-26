@@ -666,53 +666,51 @@ legend b { color: var(--hueso); font-weight: 500; }
     });
   });
 
-  /* ---------------- Interesados: contador compartido ---------------- */
+  /* ---------------- Interesados: contador conectado a Supabase ---------------- */
+  var SB_URL = 'https://jhsrxfwckqsiyjgryjkr.supabase.co';
+  var SB_CLAVE = 'sb_publishable_2UPX4A4m95_qPyi1lGxVMg_LB34nfHH';   // clave pública: solo puede usar las funciones del contador
   var form = document.getElementById('formulario'), aviso = document.getElementById('aviso');
   var correo = document.getElementById('correo'), enviar = document.getElementById('enviar');
   var contador = document.getElementById('contador'), numero = document.getElementById('numero');
-  var db = null, refTotal = null, miId = null;
+
+  function rpc(nombre, datos) {
+    return fetch(SB_URL + '/rest/v1/rpc/' + nombre, {
+      method: 'POST',
+      headers: { 'apikey': SB_CLAVE, 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos || {})
+    }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  }
   function mostrarTotal(n) {
-    numero.textContent = n;
+    n = Number(n) || 0;
+    numero.textContent = n.toLocaleString('es-MX');
     document.getElementById('texto-contador').textContent = n === 1 ? 'persona interesada' : 'personas interesadas';
-    contador.hidden = false;
+    contador.hidden = n === 0;
   }
-  if (!(window.claude && typeof window.claude.use === 'function')) {
-    form.hidden = true;
-    document.querySelector('.nota').hidden = true;
+  function yaRegistrado() { try { return localStorage.getItem('tlaco_interes') === '1'; } catch (e) { return false; } }
+
+  rpc('total_interesados').then(mostrarTotal).catch(function () {});
+  if (yaRegistrado()) {
     aviso.hidden = false;
-    aviso.textContent = 'La preventa abrirá pronto.';
-  } else {
-    window.claude.use('user').then(function (u) { return u ? u.id() : null; }).then(function (id) { miId = id; }).catch(function () {});
-    window.claude.use('db').then(function (d) {
-      if (!d) return;
-      db = d;
-      refTotal = db.doc('contador/total');
-      refTotal.onSnapshot(function (snap) {
-        var datos = snap.exists ? snap.data() : null;
-        mostrarTotal((datos && datos.n) || 0);
-      }, function () {});
-    }).catch(function () {});
+    aviso.textContent = 'Ya estás en la lista. ¡Gracias!';
   }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     aviso.hidden = false;
     var valor = correo.value.trim();
     if (valor && !correo.checkValidity()) { aviso.textContent = 'Revisa el correo, por ejemplo nombre@correo.com, o déjalo vacío.'; return; }
-    if (!db || !miId) { aviso.textContent = 'El registro funciona al abrir la página con tu cuenta de Claude. Aquí no se guardó.'; return; }
+    if (yaRegistrado() && !valor) { aviso.textContent = 'Ya estás en la lista. ¡Gracias!'; return; }
+    var color = (document.querySelector('input[name="color"]:checked') || {}).value || null;
     enviar.disabled = true;
-    // Cada correo se guarda en el espacio de quien lo registra; solo el dueño puede leerlos todos
-    db.collection('interesados/' + miId + '/registros').add({ correo: valor || null, fecha: new Date().toISOString() })
-      .then(function () { return refTotal.get(); })
-      .then(function (snap) {
-        var n = ((snap.exists && snap.data().n) || 0) + 1;
-        return refTotal.set({ n: n, actualizado: new Date().toISOString() }).then(function () { return n; });
-      })
+    aviso.textContent = 'Registrando…';
+    rpc('registrar_interes', { p_correo: valor || null, p_color: color })
       .then(function (n) {
         mostrarTotal(n);
-        aviso.textContent = '¡Gracias! Ya somos ' + n + (n === 1 ? ' persona interesada.' : ' personas interesadas.');
+        try { localStorage.setItem('tlaco_interes', '1'); } catch (err) {}
+        aviso.textContent = '¡Gracias! Ya somos ' + Number(n).toLocaleString('es-MX') + (n === 1 ? ' persona interesada.' : ' personas interesadas.');
         correo.value = '';
       })
-      .catch(function () { aviso.textContent = 'No se pudo registrar. Intenta de nuevo.'; })
+      .catch(function () { aviso.textContent = 'No se pudo registrar. Revisa tu conexión e intenta de nuevo.'; })
       .then(function () { enviar.disabled = false; });
   });
 
