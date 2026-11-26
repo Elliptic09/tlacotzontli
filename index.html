@@ -686,29 +686,29 @@ legend b { color: var(--hueso); font-weight: 500; }
     document.getElementById('texto-contador').textContent = n === 1 ? 'persona interesada' : 'personas interesadas';
     contador.hidden = n === 0;
   }
-  function yaRegistrado() { try { return localStorage.getItem('tlaco_interes') === '1'; } catch (e) { return false; } }
+  var limpiar = null;
 
-  rpc('total_interesados').then(mostrarTotal).catch(function () {});
-  if (yaRegistrado()) {
-    aviso.hidden = false;
-    aviso.textContent = 'Ya estás en la lista. ¡Gracias!';
-  }
+  // El total se actualiza solo cada 15 s (sirve si varias personas se registran en distintos equipos)
+  function actualizarTotal() { rpc('total_interesados').then(mostrarTotal).catch(function () {}); }
+  actualizarTotal();
+  setInterval(actualizarTotal, 15000);
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     aviso.hidden = false;
     var valor = correo.value.trim();
     if (valor && !correo.checkValidity()) { aviso.textContent = 'Revisa el correo, por ejemplo nombre@correo.com, o déjalo vacío.'; return; }
-    if (yaRegistrado() && !valor) { aviso.textContent = 'Ya estás en la lista. ¡Gracias!'; return; }
     var color = (document.querySelector('input[name="color"]:checked') || {}).value || null;
     enviar.disabled = true;
     aviso.textContent = 'Registrando…';
     rpc('registrar_interes', { p_correo: valor || null, p_color: color })
       .then(function (n) {
         mostrarTotal(n);
-        try { localStorage.setItem('tlaco_interes', '1'); } catch (err) {}
         aviso.textContent = '¡Gracias! Ya somos ' + Number(n).toLocaleString('es-MX') + (n === 1 ? ' persona interesada.' : ' personas interesadas.');
         correo.value = '';
+        // Listo para la siguiente persona (se puede registrar varias veces desde el mismo equipo)
+        clearTimeout(limpiar);
+        limpiar = setTimeout(function () { aviso.hidden = true; }, 5000);
       })
       .catch(function () { aviso.textContent = 'No se pudo registrar. Revisa tu conexión e intenta de nuevo.'; })
       .then(function () { enviar.disabled = false; });
